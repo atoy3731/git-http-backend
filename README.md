@@ -16,7 +16,7 @@ Running the server:
 docker run --rm 
   -p 8080:80 \
   -v /path/to/host/gitdir:/git \
-  -e "INIT_REPOS=myrepo1,myrepo2" #Comma-delimited list of repos to create at initialization \
+  -e "INIT_REPOS=myrepo1,myrepo2" \ #Comma-delimited list of repos to create at initialization 
   bgulla/git-http-backend
 ```
 
