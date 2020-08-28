@@ -22,8 +22,8 @@ RUN apk add --update nginx && \
     apk add --update spawn-fcgi && \
     rm -rf /var/cache/apk/*
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY ./run.sh /run.sh
+COPY ./src/nginx.conf /etc/nginx/nginx.conf
+COPY ./src/run.sh /run.sh
 RUN chmod +x /run.sh
 
 #CMD sh /run.sh
