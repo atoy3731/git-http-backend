@@ -5,6 +5,7 @@
 A dead simple git smart-http server using nginx as a frontend. No authentication, no SSL, push is free-for-all.
 
 > _disclaimer_ this is not intended for production use. Written to ease self-bootstrapping GitOps goodness.
+
 ![git-http-backend](static/thisisfine.png?raw=true)
 
 
