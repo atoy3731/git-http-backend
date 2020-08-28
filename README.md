@@ -5,14 +5,11 @@ A dead simple git smart-http server using nginx as a frontend. No authentication
 Usage:
 
 ```
-docker run -d -p 4080:80 -v /path/to/host/gitdir:/git ynohat/git-http-backend
+docker run --rm 
+  -p 8080:80 \
+-v /path/to/host/gitdir:/git \
+-e "INIT_REPOS=myrepo1,myrepo2" #Comma-delimited list of repos to create at initialization \
+bgulla/git-http-backend
 ```
 
-Unauthenticated push will not work unless you enable it in repositories:
 
-```
-cd /path/to/host/gitdir
-git init --bare test.git
-cd test.git
-git config http.receivepack true
-```

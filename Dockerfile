@@ -1,7 +1,7 @@
 # small is beautiful
 FROM alpine:latest
 
-MAINTAINER Anthony Hogg anthony@hogg.fr
+MAINTAINER hey@bgulla.dev
 
 # The container listens on port 80, map as needed
 EXPOSE 80
@@ -17,22 +17,16 @@ VOLUME ["/git"]
 # - nginx, because it is our frontend
 RUN apk add --update nginx && \
     apk add --update git && \
+    apk add --update git-daemon && \
     apk add --update fcgiwrap && \
     apk add --update spawn-fcgi && \
     rm -rf /var/cache/apk/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
-
-# launch fcgiwrap via spawn-fcgi; launch nginx in the foreground
-# so the container doesn't die on us; supposedly we should be
-# using supervisord or something like that instead, but this
-# will do
-#CMD spawn-fcgi -s /run/fcgi.sock /usr/bin/fcgiwrap && \
-#    nginx -g "daemon off;"
-
-
 COPY ./run.sh /run.sh
 RUN chmod +x /run.sh
 
-CMD sh /run.sh
-#['/bin/sh','/run.sh']
+#CMD sh /run.sh
+
+CMD spawn-fcgi -s /run/fcgi.sock /usr/bin/fcgiwrap && \
+    nginx -g "daemon off;"

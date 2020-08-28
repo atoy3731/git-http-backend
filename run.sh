@@ -1,12 +1,13 @@
 #!/bin/sh
 
-## TODO: make sure that we do not stomp any existing repos
-
 create_repo(){
   REPO_NAME="$1"
-  cd /git; git init --bare ${REPO_NAME}.git; cd /git/${REPO_NAME}.git; git config http.receivepack true
-  chown -R root:root /git/${REPO_NAME}.git
-  echo "[git-http] created /git/${REPO_NAME}.git"
+  REPO_PATH="/git/${REPO_NAME}.git"
+  if [ -d "${REPO_PATH}" ]; then
+    cd /git; git init --bare ${REPO_NAME}.git; cd ${REPO_PATH}; git config http.receivepack true
+    chown -R root:root ${REPO_PATH}
+    echo "[git-http] created ${REPO_PATH}"
+  fi
 }
 
 if [ ! -z "${INIT_REPOS}" ];then
@@ -19,6 +20,10 @@ else
   echo "[git-http] env INIT_REPOS is empty. skipping initial creation"
 fi
 
+# launch fcgiwrap via spawn-fcgi; launch nginx in the foreground
+# so the container doesn't die on us; supposedly we should be
+# using supervisord or something like that instead, but this
+# will do
 spawn-fcgi -s /run/fcgi.sock /usr/bin/fcgiwrap && \
     nginx -g "daemon off;"
 ## TODO: add loggging to stdout here
