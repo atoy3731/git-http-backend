@@ -26,7 +26,7 @@ git clone http://localhost:8080/git/myrepo1.git
 echo "profit!"
 ```
 
-## Notes
+## Interactive Initialization
 You will need to set the `INIT_REPOS` env var in order to self-bootstrap a repository within the /git folder. If you want to manually create the repo while the container is running, do the following:
 
 ```bash
