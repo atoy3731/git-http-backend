@@ -26,7 +26,4 @@ COPY ./src/nginx.conf /etc/nginx/nginx.conf
 COPY ./src/run.sh /run.sh
 RUN chmod +x /run.sh
 
-#CMD sh /run.sh
-
-CMD spawn-fcgi -s /run/fcgi.sock /usr/bin/fcgiwrap && \
-    nginx -g "daemon off;"
+CMD sh /run.sh
