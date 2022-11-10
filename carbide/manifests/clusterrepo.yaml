@@ -1,0 +1,7 @@
+apiVersion: catalog.cattle.io/v1
+kind: ClusterRepo
+metadata:
+  name: carbide-charts
+spec:
+  gitBranch: main
+  gitRepo: http://carbide-charts.carbide.svc.cluster.local/git/charts.git
