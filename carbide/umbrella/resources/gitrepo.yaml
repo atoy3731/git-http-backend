@@ -6,6 +6,11 @@ metadata:
 spec:
   repo: http://carbide-charts.carbide.svc.cluster.local/git/git-http-backend.git
   targets:
-  - clusterSelector: {}
+  - clusterSelector:
+      matchExpressions:
+      - key: provider.cattle.io
+        operator: NotIn
+        values:
+        - harvester
   paths:
   - "./carbide/manifests"

@@ -19,7 +19,7 @@ metadata:
 EOF
 
 echo "Creating Git chart repo deployment.."
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply --wait -f -
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -57,6 +57,10 @@ spec:
       port: 80
       targetPort: http
 EOF
+
+echo "Waiting for Git pods to be ready.."
+sleep 5
+kubectl wait pods -n carbide -l app=carbide-charts --for condition=Ready --timeout=90s
 
 echo "Creating Gitrepo to trigger umbrella flow.."
 cat <<EOF | kubectl apply -f -
