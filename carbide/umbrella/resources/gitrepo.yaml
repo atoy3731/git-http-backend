@@ -1,0 +1,9 @@
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: carbide-src
+  namespace: fleet-default
+spec:
+  repo: http://carbide-charts.carbide.svc.cluster.local/git/git-http-backend.git
+  paths:
+  - "./carbide/manifests"

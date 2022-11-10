@@ -6,10 +6,6 @@ MAINTAINER hey@bgulla.dev
 # The container listens on port 80, map as needed
 EXPOSE 80
 
-# This is where the repositories will be stored, and
-# should be mounted from the host (or a volume container)
-VOLUME ["/git"]
-
 # We need the following:
 # - git, because that gets us the git-http-backend CGI script
 # - fcgiwrap, because that is how nginx does CGI
@@ -21,6 +17,14 @@ RUN apk add --update nginx && \
     apk add --update fcgiwrap && \
     apk add --update spawn-fcgi && \
     rm -rf /var/cache/apk/*
+
+# Initialize charts
+COPY ./src/charts.txt /tmp/charts.txt
+COPY ./src/init-charts.sh /tmp/init-charts.sh
+RUN chmod +x /tmp/init-charts.sh && \
+    sh /tmp/init-charts.sh && \
+    rm -f /tmp/charts.txt && \
+    rm -f /tmp/init-charts.sh
 
 COPY ./src/nginx.conf /etc/nginx/nginx.conf
 COPY ./src/run.sh /run.sh

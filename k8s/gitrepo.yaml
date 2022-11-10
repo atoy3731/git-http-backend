@@ -1,0 +1,16 @@
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: carbide-charts
+  namespace: fleet-local
+spec:
+  repo: http://carbide-charts.carbide.svc.cluster.local/git/git-http-backend.git
+  targets:
+  - clusterSelector:
+      matchExpressions:
+      - key: provider.cattle.io
+        operator: NotIn
+        values:
+        - harvester
+  paths:
+  - "./carbide/umbrella"
