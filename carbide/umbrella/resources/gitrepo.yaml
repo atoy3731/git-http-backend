@@ -5,5 +5,6 @@ metadata:
   namespace: fleet-default
 spec:
   repo: http://carbide-charts.carbide.svc.cluster.local/git/git-http-backend.git
+  clusterSelector: {}
   paths:
   - "./carbide/manifests"

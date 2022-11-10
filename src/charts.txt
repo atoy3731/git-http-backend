@@ -1,1 +1,1 @@
-https://github.com/atoy3731/prehook-test.git
+https://github.com/atoy3731/git-http-backend.git
