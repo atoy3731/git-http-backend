@@ -70,10 +70,10 @@ spec:
   targets:
   - clusterSelector:
       matchExpressions:
-      - key: carbide
+      - key: provider.cattle.io
         operator: NotIn
         values:
-        - disabled
+        - harvester
   paths:
   - "./carbide/umbrella"
 EOF
