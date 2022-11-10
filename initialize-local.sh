@@ -5,6 +5,9 @@
 # This will initialize all things Carbide on your downstream clusters. #
 ########################################################################
 
+echo "Labeling the local cluster as 'carbide=enabled'.."
+kubectl patch clusters -n fleet-local local -p '{"metadata":{"labels":{"carbide":"enabled"}}}' --type=merge
+
 echo "Creating the Carbide namespace.."
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -67,10 +70,10 @@ spec:
   targets:
   - clusterSelector:
       matchExpressions:
-      - key: provider.cattle.io
-        operator: NotIn
+      - key: carbide
+        operator: In
         values:
-        - harvester
+        - enabled
   paths:
   - "./carbide/umbrella"
 EOF
