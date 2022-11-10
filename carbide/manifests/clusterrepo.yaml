@@ -3,5 +3,5 @@ kind: ClusterRepo
 metadata:
   name: carbide-charts
 spec:
-  gitBranch: main
+  gitBranch: master
   gitRepo: http://carbide-charts.carbide.svc.cluster.local/git/git-http-backend.git

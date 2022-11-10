@@ -68,7 +68,12 @@ metadata:
 spec:
   repo: http://carbide-charts.carbide.svc.cluster.local/git/git-http-backend.git
   targets:
-  - clusterSelector: {}
+  - clusterSelector:
+      matchExpressions:
+      - key: carbide
+        operator: NotIn
+        values:
+        - disabled
   paths:
   - "./carbide/umbrella"
 EOF
