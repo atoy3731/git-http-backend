@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: carbide-charts
-        image: harbor.atoy.dev/public/carbide-charts:1.0
+        image: harbor.atoy.dev/public/carbide-charts:1.1
         ports:
         - name: http
           containerPort: 80
@@ -68,12 +68,7 @@ metadata:
 spec:
   repo: http://carbide-charts.carbide.svc.cluster.local/git/git-http-backend.git
   targets:
-  - clusterSelector:
-      matchExpressions:
-      - key: carbide
-        operator: In
-        values:
-        - enabled
+  - clusterSelector: {}
   paths:
   - "./carbide/umbrella"
 EOF
